@@ -23,7 +23,7 @@ export default class SearchableMovieReviewsContainer extends Component{
   }
 
   handleSubmit = (evt) => {
-    fetch(URL).then(res => res.json()).then(json => {this.setState({reviews: json.results})})
+    fetch(URL).then(res => res.json()).then(json => {this.setState({reviews: json.results})}).catch(console.log)
   }
 
 

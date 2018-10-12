@@ -19,7 +19,7 @@ export default class LatestMovieReviewsContainer extends Component {
   componentDidMount(){
     // *ASYNC: stuff
     fetch(URL)
-      .then(json => {this.setState({reviews: json.results})})
+      .then(json => {this.setState({reviews: json.results})}).catch(console.log)
   }
 
   /*/ shouldComponentUpdate(nextProps, nextState){
@@ -27,9 +27,7 @@ export default class LatestMovieReviewsContainer extends Component {
   // }*/
 
   latestReviews = () => {
-    let reviewsLength = this.state.reviews.length
-    const latestReviews = this.state.reviews.filter((rvw, idx) => idx > reviewsLength - 4)
-    return latestReviews
+    return [...this.state.reviews].slice(-3)
   }
   
   render(){
