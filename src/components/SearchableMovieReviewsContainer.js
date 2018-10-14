@@ -20,43 +20,41 @@ export default class SearchableMovieReviewsContainer extends Component {
 
   changeFilter = (evt) => {
     evt.preventDefault()
-    debugger
-    let newFilter = evt.target.name
+
+    let newFilter = evt.target.search.value
     this.setState({
       searchTerm: newFilter
-    }
-    // , console.log(this.state.searchTerm)
-    )
+    }, () => this.updateMovies())
+
   }
 
-  componentDidMount() {
+  updateMovies = () => {
   fetch(URL + `query=${this.state.searchTerm}&` + API )
   .then(res => res.json())
   .then(res => {
     this.setState({
     reviews: res.results
   }
-  // , () => console.log(this.state)
+  , () => console.log(this.state)
       )
     })
   }
 
 
   renderSearch = () => {
-    debugger
+
     return this.state.reviews.map(review => <MovieReviews text={review} />)
   }
 
   render(){
+
     return (
       <div className="searchable-movie-reviews" >
         <form onSubmit={this.changeFilter}>
           <input name="search"/>
           <input type="submit" value="Submit" />
         </form>
-        <div>
-          {this.renderSearch()}
-        </div>
+          {this.state.searchTerm ? this.renderSearch() : ''}
     </div>
     )
   }

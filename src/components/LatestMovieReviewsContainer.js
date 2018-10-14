@@ -9,7 +9,7 @@ const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?'
 
 
 export const ReviewList = (props) => {
-  debugger
+
 
   return <div className="latest-movie-reviews">
     {props.reviews.map(review => <MovieReviews text={review} />)}
@@ -43,7 +43,7 @@ export default class LatestMovieReviewsContainer extends Component {
   render(){
     return (
       <div className="latest-movie-reviews" >
-        <ReviewList reviews={this.state.reviews}/>
+        {this.state.reviews ? <ReviewList reviews={this.state.reviews}/> : ''}
 
     </div>
     )
